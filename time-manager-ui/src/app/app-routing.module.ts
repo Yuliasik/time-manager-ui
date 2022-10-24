@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TestComponent } from "./test/test.component";
+import { AuthenticationGuard } from "./authentication.guard";
+import { LoginFormComponent } from "./login/login-form/login-form.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/test',
-    pathMatch: 'full'
-  },
-  {
-    path: 'test',
-    component: TestComponent,
-  },
+    canActivate: [AuthenticationGuard],
+    children: [
+      {
+        path: '',
+        component: TestComponent,
+      },
+      {
+        path: 'login',
+        component: LoginFormComponent,
+      },
+      {
+        path: '**',
+        redirectTo: ''
+      },
+    ]
+  }
 ];
 
 @NgModule({
