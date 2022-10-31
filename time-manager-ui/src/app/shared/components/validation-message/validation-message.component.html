@@ -1,0 +1,7 @@
+<div class="container lineUp" *ngIf="internalCondition"
+     [ngClass]="!externalCondition ? 'lineDown' : '' ">
+  <div class="icon">
+    <mat-icon>error</mat-icon>
+  </div>
+  <ng-content></ng-content>
+</div>
