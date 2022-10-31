@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
   }
 
   isDifferentPassword(): boolean {
-    return (this.password && this.repeatPassword) ? this.password !== this.repeatPassword : false
+    return !!this.password && !!this.repeatPassword && this.password !== this.repeatPassword
   }
 
 }

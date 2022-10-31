@@ -9,6 +9,7 @@ export class ValidationMessageComponent {
 
   internalCondition: boolean = false
   externalCondition: boolean = false
+  timerFunc: any;
 
   @Input()
   set condition(condition: boolean) {
@@ -28,7 +29,8 @@ export class ValidationMessageComponent {
   }
 
   setInternalCondition(condition: boolean, delay: number = 0) {
-    setTimeout(() => {
+    clearTimeout(this.timerFunc)
+    this.timerFunc = setTimeout(() => {
       this.internalCondition = condition
     }, delay)
   }

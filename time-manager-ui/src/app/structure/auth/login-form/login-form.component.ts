@@ -48,19 +48,4 @@ export class LoginFormComponent implements OnInit {
     this.router.navigate(['/greeting']);
   }
 
-  // register() {
-  //   let url = "/api/register";
-  //   let loginDto: LoginDto = this.loginForm.value as LoginDto;
-  //   this.http.post<Session>(url, loginDto)
-  //     .subscribe((session: Session) => {
-  //       if (session) {
-  //         this.sessionId = session.sessionId
-  //         sessionStorage.setItem('token', this.sessionId);
-  //         this.router.navigate(['']);
-  //       } else {
-  //         alert("Register failed!")
-  //       }
-  //     })
-  // }
-
 }
