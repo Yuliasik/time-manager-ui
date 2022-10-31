@@ -1,0 +1,33 @@
+@import "src/styles";
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.name-container {
+  margin-bottom: 80px;
+  padding: 40px;
+  font-size: 100px;
+  font-family: $font-header;
+  letter-spacing: 8px;
+  text-shadow: 3px 3px 3px rgba(92, 102, 107, 0.75);
+}
+
+.button-container {
+  width: 700px;
+  min-width: 500px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-greeting {
+  width: 250px;
+  padding: 15px 20px;
+  border-radius: 15px;
+  font-size: 35px;
+}
