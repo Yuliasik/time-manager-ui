@@ -20,6 +20,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from "ng-recaptcha";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -44,13 +46,21 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RecaptchaFormsModule,
+    RecaptchaModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
     }
   ],
   bootstrap: [AppComponent]

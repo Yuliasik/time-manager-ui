@@ -30,8 +30,14 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      repeatPassword: ['', [Validators.required]]
+      password: ['',
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-@^=+!#()$?._%&*])(?=.*[a-zA-Z]).{8,}$/)
+        ]
+      ],
+      repeatPassword: ['', [Validators.required]],
+      recaptcha: ['', [Validators.required]]
     })
   }
 

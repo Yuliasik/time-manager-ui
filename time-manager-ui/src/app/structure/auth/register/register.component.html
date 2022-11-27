@@ -7,12 +7,18 @@
            id="username"
            formControlName="username"/>
   </div>
-  <div class="block-input">
-    <label for="password">Password</label>
-    <input type="text"
-           name="password"
-           id="password"
-           formControlName="password"/>
+  <div class="block-input-with-error">
+    <div class="block-input">
+      <label for="password">Password</label>
+      <input type="text"
+             name="password"
+             id="password"
+             formControlName="password"/>
+    </div>
+    <app-validation-message class="error-message" [condition]="loginForm.get('password')!.hasError('pattern')">
+      The password must contain upper and lower case letters, numbers, and other special characters.
+      The minimum number of characters is 8.
+    </app-validation-message>
   </div>
   <div class="block-input-with-error">
     <div class="block-input">
@@ -22,7 +28,13 @@
              id="repeat-password"
              formControlName="repeatPassword"/>
     </div>
-    <app-validation-message [condition]="isDifferentPassword()"> Error: Different passwords!</app-validation-message>
+    <app-validation-message class="error-message" [condition]="isDifferentPassword()"> Error: Different passwords!
+    </app-validation-message>
+  </div>
+  <div class="block-input">
+    <re-captcha id="recaptcha" formControlName="recaptcha" required
+                [class.is-invalid]="loginForm.get('recaptcha')!.invalid
+                    && (loginForm.get('recaptcha')!.dirty || loginForm.get('recaptcha')!.touched)"></re-captcha>
   </div>
   <div class="button-container">
     <button class="button button-back" (click)="back()">
@@ -30,6 +42,6 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
       <span class="material-symbols-outlined">arrow_back_ios</span>
     </button>
-    <button class="button button-login" (click)="register()">Register</button>
+    <button class="button button-login" (click)="register()" [disabled]="loginForm.invalid">Register</button>
   </div>
 </div>
