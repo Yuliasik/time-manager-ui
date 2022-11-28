@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap');
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "styles-material.scss";
 
 @font-face {
   font-family: "Nautilus";
@@ -7,13 +9,16 @@
 
 $font-button: "Crimson Text", serif;
 $font-header: "Nautilus", serif;
+$black-for-component: #1a1818;
+$text-shadow: 3px 3px 3px rgba(92, 102, 107, 0.75);
+$background-image: "background1.jpg";
 
 html, body {
   height: 100%;
 }
 
 body {
-  background-image: url("assets/img/backgound/background1.jpg");
+  background-image: url("assets/img/backgound/" + $background-image);
   background-repeat: repeat;
   background-blend-mode: overlay;
   padding: 0;
@@ -26,12 +31,17 @@ app-root {
   display: block;
 }
 
+.name-container {
+  font-family: $font-header;
+  text-shadow: $text-shadow
+}
+
 .button {
   border: 1px solid black;
   font-family: $font-button;
   font-style: italic;
   background: rgba(127, 142, 147, 0.28);
-  box-shadow: 3px 3px 3px rgba(92, 102, 107, 0.75);
+  box-shadow: $text-shadow
 }
 
 .button:hover {
@@ -49,6 +59,47 @@ div.cdk-global-overlay-wrapper {
   justify-content: center;
   align-items: center;
   background: rgba(82, 82, 82, 0.81);
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: $black-for-component !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: $black-for-component !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: $black-for-component !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: $black-for-component !important;
+}
+
+
+mat-datepicker-toggle {
+  color: $black-for-component !important;
+}
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $black-for-component !important;
+}
+
+.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+  background: rgba(87, 87, 87, 0.75) !important;
+}
+
+.mat-form-with-error .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+.mat-form-with-error .mat-form-field-underline {
+  bottom: 0 !important;
 }
 
 .rc-anchor-light.rc-anchor-normal {

@@ -22,6 +22,12 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from "ng-recaptcha";
 import { environment } from "../environments/environment";
+import { TaskCreateComponent } from './structure/task/task-create/task-create.component';
+import { NoticesComponent } from './structure/notices/notices.component';
+import { MatInputModule } from "@angular/material/input";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -35,7 +41,9 @@ import { environment } from "../environments/environment";
     FooterComponent,
     RegisterComponent,
     ValidationMessageComponent,
-    DialogComponent
+    DialogComponent,
+    TaskCreateComponent,
+    NoticesComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,11 @@ import { environment } from "../environments/environment";
     MatDialogModule,
     BrowserAnimationsModule,
     RecaptchaFormsModule,
-    RecaptchaModule
+    RecaptchaModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   providers: [
     {
