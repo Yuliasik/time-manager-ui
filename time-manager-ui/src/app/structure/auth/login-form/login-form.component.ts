@@ -39,6 +39,7 @@ export class LoginFormComponent implements OnInit {
           if (session) {
             this.sessionId = session.sessionId
             sessionStorage.setItem('token', this.sessionId);
+            sessionStorage.setItem('userId', String(session.userId))
             this.router.navigate(['']);
           } else {
             alert("Authentication failed!")
@@ -78,6 +79,5 @@ export class LoginFormComponent implements OnInit {
   private resetPassword() {
     this.loginForm.get("password")?.reset();
   }
-
 
 }

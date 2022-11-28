@@ -67,6 +67,7 @@ export class RegisterComponent implements OnInit {
           }
         }, (errorRes) => {
           this.dialogConfig.hasBackdrop = true
+          this.dialogConfig.disableClose = true
           this.dialogConfig.data = {
             message: errorRes.error
           }

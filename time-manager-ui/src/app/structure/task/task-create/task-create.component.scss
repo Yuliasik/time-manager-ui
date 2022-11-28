@@ -1,0 +1,95 @@
+@import "src/styles";
+
+.dialog-wrapper {
+  padding: 35px 45px;
+  background-image: url("../../../../assets/img/backgound/" + $background-image);
+  border-radius: 3px;
+  box-shadow: 4px 8px 12px 0 rgba(0, 0, 0, 0.4);
+  animation: show-modal 1s ease-in-out;
+}
+
+.fields-container {
+  max-height: 75vh !important;
+  overflow-y: hidden !important;
+}
+
+.buttons-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkbox {
+  font-size: 15px;
+}
+
+.button-close {
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
+  font-size: 18px;
+}
+
+@keyframes show-modal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide-modal {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.medium-wight {
+  width: 296px;
+}
+
+.name {
+  font-size: 35px;
+  letter-spacing: 4px;
+}
+
+.time-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  z-index: 500;
+}
+
+.time-block {
+  width: 120px;
+  padding-right: 10px;
+}
+
+#time-block-minutes {
+  z-index: 1000;
+}
+
+.label-hour {
+  padding-right: 50px;
+}
+
+.text {
+  font-weight: bold;
+}

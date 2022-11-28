@@ -14,7 +14,8 @@ export class DialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: any) {
+    @Inject(MAT_DIALOG_DATA) data: any
+  ) {
     this.message = data.message ? data.message : "Something went wrong!"
     this.title = data.title ? data.title : "Error"
     this.button = data.button ? data.button : "Close"

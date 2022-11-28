@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TestComponent } from "./structure/test/test.component";
 import { AuthenticationGuard } from "./authentication.guard";
 import { LoginFormComponent } from "./structure/auth/login-form/login-form.component";
 import { GreetingComponent } from "./structure/greeting/greeting.component";
 import { RegisterComponent } from "./structure/auth/register/register.component";
+import { NoticesComponent } from "./structure/notices/notices.component";
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: TestComponent,
+        component: NoticesComponent,
       },
       {
         path: '**',

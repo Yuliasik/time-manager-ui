@@ -1,0 +1,58 @@
+<div class="dialog-wrapper">
+  <h1 mat-dialog-title class="name-container name">Add task</h1>
+  <form class="example-form" [formGroup]="taskForm">
+    <div mat-dialog-content class="fields-container">
+      <mat-form-field class="example-full-width"
+                      [ngClass]="resolveClassWithError(taskForm.controls['title'].hasError('maxlength'))"
+                      appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" type="text"/>
+      </mat-form-field>
+      <app-validation-message class="error-message"
+                              [condition]="taskForm.controls['title'].hasError('maxlength')">
+        Length of title must be lower than or equals to 50
+      </app-validation-message>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Leave a description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field class="medium-wight" appearance="fill">
+        <mat-label>Performance period</mat-label>
+        <mat-date-range-input
+          [rangePicker]="campaignOnePicker">
+          <input matStartDate placeholder="Start date" formControlName="startDate">
+          <input matEndDate placeholder="End date" formControlName="endDate">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-form-field class="mat-form-with-error medium-wight" appearance="fill">
+        <mat-label>Approximate performance time</mat-label>
+        <div class="time-container">
+          <input matInput class="time-block" id="time-block-hours" formControlName="hours" type="number"
+                 placeholder="hour"
+                 [min]="0" [max]="99"/>
+          <span class="text label-hour">hour</span>
+          <input matInput class="time-block" id="time-block-minutes" formControlName="minutes" type="number"
+                 placeholder="minute"
+                 [min]="0" [max]="59"/>
+          <span class="text">minute</span>
+        </div>
+      </mat-form-field>
+      <app-validation-message class="error-message"
+                              [condition]="(taskForm.controls['hours'].touched
+                              ||  taskForm.controls['minutes'].touched)
+                              && isEnteredApproximatePerformanceTime()">
+        You must to enter hours or minutes.
+      </app-validation-message>
+    </div>
+    <div class="buttons-wrapper">
+      <mat-checkbox class="checkbox" formControlName="check">Create another</mat-checkbox>
+      <button class="button button-close" (click)="onCancelClick()">Close</button>
+      <button class="button button-close"
+              [disabled]="taskForm.invalid || isEnteredApproximatePerformanceTime()"
+              (click)="onSubmitClick()">Save
+      </button>
+    </div>
+  </form>
+</div>
