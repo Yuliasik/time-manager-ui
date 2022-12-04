@@ -1,8 +1,10 @@
+@import "src/styles";
+
 .wrapper {
   margin: 0;
   padding-right: 10px;
   height: 40px;
-  background: rgba(88, 107, 115, 0.7);
+  background: $background-dark-grey;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

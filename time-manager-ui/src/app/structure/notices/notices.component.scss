@@ -32,6 +32,28 @@
 }
 
 .main-wrapper {
-  height: calc(100% - 50px);
+  height: calc(100% - 91px);
   padding: 10px;
+  overflow-y: auto;
+}
+
+.text-no-task {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-header;
+  letter-spacing: 2.5px;
+  font-size: 25px;
+}
+
+.tasks {
+  width: 100%;
+  padding-top: 10px;
+  overflow-y: hidden;
+}
+
+.infinite-scroll-container{
+  overflow-y: auto;
 }

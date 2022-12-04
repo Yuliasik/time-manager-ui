@@ -6,5 +6,6 @@ export class Task {
   description: string | undefined;
   startDate: string | undefined;
   endDate: string | undefined;
+  performanceDate?: string;
   approximatePerformanceTime: string | undefined;
 }

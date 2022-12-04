@@ -12,10 +12,16 @@
                               [condition]="taskForm.controls['title'].hasError('maxlength')">
         Length of title must be lower than or equals to 50
       </app-validation-message>
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field class="example-full-width"
+                      [ngClass]="resolveClassWithError(taskForm.controls['description'].hasError('maxlength'))"
+                      appearance="fill">
         <mat-label>Leave a description</mat-label>
         <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
+      <app-validation-message class="error-message"
+                              [condition]="taskForm.controls['description'].hasError('maxlength')">
+        Length of description must be lower than or equals to 500
+      </app-validation-message>
       <mat-form-field class="medium-wight" appearance="fill">
         <mat-label>Performance period</mat-label>
         <mat-date-range-input

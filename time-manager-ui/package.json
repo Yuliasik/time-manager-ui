@@ -20,7 +20,10 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "colcade": "^0.2.0",
+    "magic-grid": "^3.2.4",
     "ng-recaptcha": "^10.0.0",
+    "ngx-infinite-scroll": "^14.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

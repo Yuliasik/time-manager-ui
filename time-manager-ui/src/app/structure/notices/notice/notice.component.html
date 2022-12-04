@@ -1,0 +1,11 @@
+<div class="notice" [ngClass]="isToday()? 'today': ''">
+  <div class="main-container">
+    <div class="date">{{dateAfterFormat}}</div>
+    <div class="weekday">{{weekday}}</div>
+  </div>
+  <div class="tasks">
+    <div *ngFor="let task of taskForOneDate">
+      <app-task-tile [task]="task"></app-task-tile>
+    </div>
+  </div>
+</div>

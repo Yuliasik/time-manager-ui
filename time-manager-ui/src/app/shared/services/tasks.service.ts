@@ -15,6 +15,10 @@ export class TasksService {
   ) {
   }
 
+  getTasks(page: number): Observable<Map<string, Task[]>> {
+    return this.httpService.get<Map<string, Task[]>>(`${this._tasksPath}?page=${page}`)
+  }
+
   getTask(id: number): Observable<Task> {
     return this.httpService.get<Task>(`${this._tasksPath}/${id}`)
   }

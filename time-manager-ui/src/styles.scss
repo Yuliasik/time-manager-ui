@@ -9,9 +9,11 @@
 
 $font-button: "Crimson Text", serif;
 $font-header: "Nautilus", serif;
+$background-image: "background1.jpg";
 $black-for-component: #1a1818;
 $text-shadow: 3px 3px 3px rgba(92, 102, 107, 0.75);
-$background-image: "background1.jpg";
+$background-dark-grey: rgba(88, 107, 115, 0.7);
+$orange-powder: #ffa088;
 
 html, body {
   height: 100%;
@@ -46,7 +48,7 @@ app-root {
 
 .button:hover {
   background: rgba(113, 126, 131, 0.56);
-  color: #ffa088;
+  color: $orange-powder;
 }
 
 div.cdk-global-overlay-wrapper {
