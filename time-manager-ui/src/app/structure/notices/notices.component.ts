@@ -100,18 +100,29 @@ export class NoticesComponent implements OnInit, AfterContentChecked {
   }
 
   private addNewTaskToView(task: Task) {
-    const dateString = task.performanceDate!
-    const data = new Date(dateString).getTime()
-    let tasks = this.allTasks.get(dateString);
+    const taskPerformanceDateString = task.performanceDate!
+    const taskPerformanceDate = new Date(taskPerformanceDateString).getTime()
+    let tasks = this.allTasks.get(taskPerformanceDateString);
     if (tasks) {
       tasks.push(task)
       return;
     }
     let length = this.dates.length;
-    if ((new Date(this.dates[0]).getTime() < data && data < new Date(this.dates[length - 1]).getTime())
+    if ((new Date(this.dates[0]).getTime() < taskPerformanceDate && taskPerformanceDate < new Date(this.dates[length - 1]).getTime())
       || length < MAX_COUNT_ON_ONE_PAGE) {
-      this.allTasks.set(dateString, [task])
+      this.allTasks.set(taskPerformanceDateString, [task])
       this.dates = Array.from(this.allTasks.keys()).sort();
+    }
+  }
+
+  deleteTask(task: Task) {
+    const performanceDate = task.performanceDate!
+    let tasks = this.allTasks.get(performanceDate);
+    if (tasks) {
+      tasks.splice(tasks.indexOf(task), 1);
+      if (tasks.length == 0) {
+        this.dates.splice(this.dates.indexOf(performanceDate), 1);
+      }
     }
   }
 
