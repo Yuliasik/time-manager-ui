@@ -1,0 +1,52 @@
+@import "src/styles";
+
+.dialog-wrapper {
+  width: 500px;
+  padding: 35px 45px;
+  background-image: url("../../../../assets/img/backgound/" + $background-image);
+  border-radius: 3px;
+  box-shadow: 4px 8px 12px 0 rgba(0, 0, 0, 0.4);
+  animation: show-modal 1s ease-in-out;
+}
+
+.name {
+  font-size: 35px;
+  letter-spacing: 4px;
+}
+
+.buttons-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-style {
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  font-size: 20px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.task-container {
+  margin: 10px;
+  padding: 15px;
+  background: rgba(127, 142, 147, 0.28);
+}
+
+.top-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

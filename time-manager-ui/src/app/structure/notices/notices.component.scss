@@ -51,9 +51,10 @@
 .tasks {
   width: 100%;
   padding-top: 10px;
+  padding-bottom: 10px;
   overflow-y: hidden;
 }
 
-.infinite-scroll-container{
+.infinite-scroll-container {
   overflow-y: auto;
 }
