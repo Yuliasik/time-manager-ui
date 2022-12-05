@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, LOCALE_ID, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import {
   AbstractControl,
@@ -14,6 +14,7 @@ import { TasksService } from "../../../shared/services/tasks.service";
 import { DialogComponent } from "../../../shared/components/dialog/dialog.component";
 import { Task } from "../../../shared/models/task";
 import { BaseCreateComponent } from "../../BaseCreateComponent";
+import { formatDate } from "@angular/common";
 
 const today = new Date();
 
@@ -27,14 +28,17 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
   private task = new Task();
   dialogConfig = new MatDialogConfig();
   taskForm!: FormGroup
+  tasksFromApi: Task[] = [];
 
+  @Output() taskCreated = new EventEmitter<Task>();
 
   constructor(
     public dialog: MatDialog,
     private tasksService: TasksService,
     private dialogRef: MatDialogRef<TaskCreateComponent>,
     private dateAdapter: DateAdapter<Date>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    @Inject(LOCALE_ID) public locale: string
   ) {
     super();
     this.dateAdapter.setLocale('en-GB');
@@ -50,9 +54,11 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
 
   onSubmitClick() {
     this.task.userId = +sessionStorage.getItem("userId")!
-    this.tasksService.addTask(this.getTaskFromForm()).subscribe(() => {
+    this.tasksService.addTask(this.getTaskFromForm()).subscribe(taskFromApi => {
+        this.tasksFromApi.push(taskFromApi);
         if (!this.getValueOf("check")) {
-          this.dialogRef.close();
+          this.dialogRef.close({data: this.tasksFromApi});
+          this.tasksFromApi = [];
         }
         this.resetForm();
       },
@@ -70,7 +76,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
   private initTaskForm() {
     this.taskForm = this.formBuilder.group({
       title: new FormControl("", [Validators.required, this.validatorEmptyLine(), Validators.maxLength(50)]),
-      description: new FormControl(""),
+      description: new FormControl("", Validators.maxLength(500)),
       startDate: new FormControl(today, Validators.required),
       endDate: new FormControl(today, Validators.required),
       hours: new FormControl(0, Validators.required),
@@ -99,8 +105,8 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
     let task = new Task();
     task.title = this.getValueOf("title");
     task.description = this.getValueOf("description");
-    task.startDate = this.getValueOf("startDate");
-    task.endDate = this.getValueOf("endDate");
+    task.startDate = formatDate(this.getValueOf("startDate"), 'y-M-dd', this.locale);
+    task.endDate = formatDate(this.getValueOf("endDate"), 'y-M-dd', this.locale);
     task.approximatePerformanceTime = this.getValueOf("hours") + ":" + this.getValueOf("minutes")
     return task;
   }

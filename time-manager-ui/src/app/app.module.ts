@@ -28,6 +28,11 @@ import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { TaskTileComponent } from './structure/notices/task-tile/task-tile.component';
+import { NoticeComponent } from './structure/notices/notice/notice.component';
+import { MatMenuModule } from "@angular/material/menu";
+import { ScrollingModule } from "@angular/cdk/scrolling";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -43,7 +48,9 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     ValidationMessageComponent,
     DialogComponent,
     TaskCreateComponent,
-    NoticesComponent
+    NoticesComponent,
+    TaskTileComponent,
+    NoticeComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +67,10 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule,
+    ScrollingModule,
+    InfiniteScrollModule
   ],
   providers: [
     {

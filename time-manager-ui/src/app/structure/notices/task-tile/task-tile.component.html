@@ -1,0 +1,22 @@
+<div class="task-container">
+  <div class="task-main-data-block">
+    <div class="title">{{task.title}}</div>
+    <div class="description">{{task.description}}</div>
+  </div>
+  <div class="action-block">
+    <div>Status</div>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+@import "src/styles";
+
+.notice {
+  width: 350px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  box-shadow: $text-shadow;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.weekday {
+  margin-left: 15px;
+  font-style: italic;
+}
+
+.today {
+  box-shadow: 0 0 10px $orange-powder, 0 0 5px antiquewhite;
+}

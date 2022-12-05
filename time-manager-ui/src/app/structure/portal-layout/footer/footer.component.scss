@@ -1,5 +1,7 @@
+@import "src/styles";
+
 footer {
-  background: rgba(88, 107, 115, 0.7);
+  background: $background-dark-grey;
 }
 
 .text-center {

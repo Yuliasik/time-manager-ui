@@ -15,7 +15,7 @@
   font-size: 100px;
   font-family: $font-header;
   letter-spacing: 8px;
-  text-shadow: 3px 3px 3px rgba(92, 102, 107, 0.75);
+  text-shadow: $text-shadow;
 }
 
 .button-container {
