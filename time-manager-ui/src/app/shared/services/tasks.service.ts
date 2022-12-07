@@ -29,6 +29,7 @@ export class TasksService {
   }
 
   updateTask(task: Task): Observable<Task> {
+    task.userId = +sessionStorage.getItem("userId")!
     return this.httpService.put<Task>(this._tasksPath, task)
   }
 

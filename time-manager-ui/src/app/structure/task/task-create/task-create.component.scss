@@ -51,10 +51,20 @@
   }
 }
 
-.example-form {
+.form-wrapper {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.state {
+  text-align: right;
 }
 
 .example-full-width {
@@ -91,5 +101,13 @@
 }
 
 .text {
+  font-weight: bold;
+}
+
+.performance-date {
+  padding-bottom: 21.5px;
+}
+
+.performance-date-label {
   font-weight: bold;
 }
