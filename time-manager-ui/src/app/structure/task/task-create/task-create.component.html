@@ -1,6 +1,13 @@
 <div class="dialog-wrapper">
-  <h1 mat-dialog-title class="name-container name">Add task</h1>
-  <form class="example-form" [formGroup]="taskForm">
+  <form class="form-wrapper" [formGroup]="taskForm">
+    <div class="header-container">
+      <h1 mat-dialog-title class="name-container name">
+        {{actionForTitle}} task
+      </h1>
+      <div *ngIf="this.isEdit">
+        <input matInput class="state" formControlName="state" type="text"/>
+      </div>
+    </div>
     <div mat-dialog-content class="fields-container">
       <mat-form-field class="example-full-width"
                       [ngClass]="resolveClassWithError(taskForm.controls['title'].hasError('maxlength'))"
@@ -16,12 +23,19 @@
                       [ngClass]="resolveClassWithError(taskForm.controls['description'].hasError('maxlength'))"
                       appearance="fill">
         <mat-label>Leave a description</mat-label>
-        <textarea matInput formControlName="description"></textarea>
+        <textarea matInput formControlName="description"
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="10">
+        </textarea>
       </mat-form-field>
       <app-validation-message class="error-message"
                               [condition]="taskForm.controls['description'].hasError('maxlength')">
         Length of description must be lower than or equals to 500
       </app-validation-message>
+      <div *ngIf="this.isEdit" class="performance-date">
+        <span class="performance-date-label">Estimated completion date - </span> {{performanceDate}}
+      </div>
       <mat-form-field class="medium-wight" appearance="fill">
         <mat-label>Performance period</mat-label>
         <mat-date-range-input
@@ -53,7 +67,9 @@
       </app-validation-message>
     </div>
     <div class="buttons-wrapper">
-      <mat-checkbox class="checkbox" formControlName="check">Create another</mat-checkbox>
+      <div *ngIf="!this.isEdit">
+        <mat-checkbox class="checkbox" formControlName="check">Create another</mat-checkbox>
+      </div>
       <button class="button button-style" (click)="onCancelClick()">Close</button>
       <button class="button button-style"
               [disabled]="taskForm.invalid || isEnteredApproximatePerformanceTime()"

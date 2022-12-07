@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { TaskCreateComponent } from "../task/task-create/task-create.component";
 import { TasksService } from "../../shared/services/tasks.service";
@@ -14,7 +14,7 @@ const MAX_COUNT_ON_ONE_PAGE = 12
   templateUrl: './notices.component.html',
   styleUrls: ['./notices.component.scss'],
 })
-export class NoticesComponent implements OnInit, AfterContentChecked {
+export class NoticesComponent implements OnInit, AfterViewChecked {
 
   dialogConfig = new MatDialogConfig();
   allTasks: Map<string, Task[]> = new Map<string, Task[]>();
@@ -33,23 +33,26 @@ export class NoticesComponent implements OnInit, AfterContentChecked {
     this.getTasksFromApi();
   }
 
-  ngAfterContentChecked() {
-    if (this.isTasksPassed) {
-      this.magicGrid = new MagicGrid({
-        container: '.tasks',
-        items: this.allTasks.size,
-        animate: true,
-        gutter: 20,
-        static: false,
-        useMin: true
-      });
-      this.magicGrid.listen();
-      this.magicGrid.positionItems();
+  ngAfterViewChecked() {
+    if (this.isTasksPassed && this.allTasks.size > 0) {
+      this.initGrid()
       this.isTasksPassed = false;
     }
     if (this.magicGrid) {
       this.magicGrid.positionItems();
     }
+  }
+
+  private initGrid() {
+    this.magicGrid = new MagicGrid({
+      container: '.tasks',
+      items: this.allTasks.size,
+      animate: true,
+      gutter: 20,
+      static: false,
+      useMin: true
+    });
+    this.magicGrid.listen();
   }
 
   onScrollDown() {
@@ -107,9 +110,7 @@ export class NoticesComponent implements OnInit, AfterContentChecked {
       tasks.push(task)
       return;
     }
-    let length = this.dates.length;
-    if ((new Date(this.dates[0]).getTime() < taskPerformanceDate && taskPerformanceDate < new Date(this.dates[length - 1]).getTime())
-      || length < MAX_COUNT_ON_ONE_PAGE) {
+    if (this.isPerformanceDateInRange(taskPerformanceDate)) {
       this.allTasks.set(taskPerformanceDateString, [task])
       this.dates = Array.from(this.allTasks.keys()).sort();
     }
@@ -126,4 +127,48 @@ export class NoticesComponent implements OnInit, AfterContentChecked {
     }
   }
 
+  updateTask(updatedTask: Task) {
+    const performanceDateUpdatedTaskString = updatedTask.performanceDate!
+    const performanceDateUpdatedTask = new Date(performanceDateUpdatedTaskString).getTime()
+    const oldTask = this.getTaskFromMapById(updatedTask.id!);
+    const performanceDateOldTask = oldTask?.performanceDate;
+
+    if (performanceDateOldTask === performanceDateUpdatedTaskString) {
+      let allTasksByPerformanceDate = this.allTasks.get(performanceDateUpdatedTaskString)!;
+      allTasksByPerformanceDate[allTasksByPerformanceDate.indexOf(oldTask!)] = updatedTask;
+      return
+    }
+    if (this.dates.includes(performanceDateUpdatedTaskString)) {
+      this.allTasks.get(performanceDateUpdatedTaskString)!.push(updatedTask)
+    } else {
+      if (this.isPerformanceDateInRange(performanceDateUpdatedTask)) {
+        this.allTasks.set(performanceDateUpdatedTaskString, [updatedTask])
+        this.dates = Array.from(this.allTasks.keys()).sort();
+      }
+    }
+    let allTasksByPerformanceDateOldTask = this.allTasks.get(performanceDateOldTask!)!;
+    allTasksByPerformanceDateOldTask.splice(allTasksByPerformanceDateOldTask.indexOf(oldTask!), 1);
+    if (allTasksByPerformanceDateOldTask.length == 0) {
+      this.allTasks.delete(performanceDateOldTask!)
+      this.dates.splice(this.dates.indexOf(performanceDateOldTask!), 1);
+    }
+    this.isTasksPassed = true
+  }
+
+  private isPerformanceDateInRange(performanceDate: number) {
+    let length = this.dates.length;
+    return (new Date(this.dates[0]).getTime() < performanceDate && performanceDate < new Date(this.dates[length - 1]).getTime())
+      || length < MAX_COUNT_ON_ONE_PAGE
+  }
+
+  private getTaskFromMapById(id: number): Task | undefined {
+    let foundedTask: Task | undefined
+    for (let date of this.dates) {
+      foundedTask = this.allTasks.get(date)!.find(t => t.id === id);
+      if (foundedTask) {
+        break
+      }
+    }
+    return foundedTask ? foundedTask : undefined;
+  }
 }
