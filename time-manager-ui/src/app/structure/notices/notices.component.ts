@@ -110,9 +110,7 @@ export class NoticesComponent implements OnInit, AfterViewChecked {
       tasks.push(task)
       return;
     }
-    let length = this.dates.length;
-    if ((new Date(this.dates[0]).getTime() < taskPerformanceDate && taskPerformanceDate < new Date(this.dates[length - 1]).getTime())
-      || length < MAX_COUNT_ON_ONE_PAGE) {
+    if (this.isPerformanceDateInRange(taskPerformanceDate)) {
       this.allTasks.set(taskPerformanceDateString, [task])
       this.dates = Array.from(this.allTasks.keys()).sort();
     }
@@ -143,10 +141,7 @@ export class NoticesComponent implements OnInit, AfterViewChecked {
     if (this.dates.includes(performanceDateUpdatedTaskString)) {
       this.allTasks.get(performanceDateUpdatedTaskString)!.push(updatedTask)
     } else {
-      let length = this.dates.length;
-      if ((new Date(this.dates[0]).getTime() < performanceDateUpdatedTask
-          && performanceDateUpdatedTask < new Date(this.dates[length - 1]).getTime())
-        || length < MAX_COUNT_ON_ONE_PAGE) {
+      if (this.isPerformanceDateInRange(performanceDateUpdatedTask)) {
         this.allTasks.set(performanceDateUpdatedTaskString, [updatedTask])
         this.dates = Array.from(this.allTasks.keys()).sort();
       }
@@ -158,6 +153,12 @@ export class NoticesComponent implements OnInit, AfterViewChecked {
       this.dates.splice(this.dates.indexOf(performanceDateOldTask!), 1);
     }
     this.isTasksPassed = true
+  }
+
+  private isPerformanceDateInRange(performanceDate: number) {
+    let length = this.dates.length;
+    return (new Date(this.dates[0]).getTime() < performanceDate && performanceDate < new Date(this.dates[length - 1]).getTime())
+      || length < MAX_COUNT_ON_ONE_PAGE
   }
 
   private getTaskFromMapById(id: number): Task | undefined {
