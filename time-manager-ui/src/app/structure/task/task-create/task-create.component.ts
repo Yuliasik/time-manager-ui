@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, LOCALE_ID, OnInit, Output } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import {
   AbstractControl,
@@ -29,8 +29,6 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
   dialogConfig = new MatDialogConfig();
   taskForm!: FormGroup
   tasksFromApi: Task[] = [];
-
-  @Output() taskCreated = new EventEmitter<Task>();
 
   constructor(
     public dialog: MatDialog,

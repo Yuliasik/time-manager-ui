@@ -16,7 +16,10 @@
   <div class="tasks">
     <ng-container *ngIf="allTasks && allTasks.size > 0; else noNotes">
       <div *ngFor="let key of dates">
-        <app-notice [taskForOneDate]=allTasks.get(key)! [date]="key"></app-notice>
+        <app-notice [taskForOneDate]=allTasks.get(key)!
+                    [date]="key"
+                    (deletedTask)="deleteTask($event)">
+        </app-notice>
       </div>
     </ng-container>
     <ng-template #noNotes>

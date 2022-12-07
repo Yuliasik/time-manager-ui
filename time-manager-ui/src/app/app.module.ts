@@ -33,6 +33,7 @@ import { NoticeComponent } from './structure/notices/notice/notice.component';
 import { MatMenuModule } from "@angular/material/menu";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     TaskCreateComponent,
     NoticesComponent,
     TaskTileComponent,
-    NoticeComponent
+    NoticeComponent,
+    TaskDeleteComponent
   ],
   imports: [
     BrowserModule,

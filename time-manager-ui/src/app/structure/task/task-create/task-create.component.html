@@ -54,8 +54,8 @@
     </div>
     <div class="buttons-wrapper">
       <mat-checkbox class="checkbox" formControlName="check">Create another</mat-checkbox>
-      <button class="button button-close" (click)="onCancelClick()">Close</button>
-      <button class="button button-close"
+      <button class="button button-style" (click)="onCancelClick()">Close</button>
+      <button class="button button-style"
               [disabled]="taskForm.invalid || isEnteredApproximatePerformanceTime()"
               (click)="onSubmitClick()">Save
       </button>

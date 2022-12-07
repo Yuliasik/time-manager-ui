@@ -1,4 +1,4 @@
-import { Component, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, LOCALE_ID, OnInit, Output } from '@angular/core';
 import { Task } from "../../../shared/models/task";
 import { formatDate } from "@angular/common";
 
@@ -11,6 +11,7 @@ export class NoticeComponent implements OnInit {
 
   @Input() taskForOneDate!: Task[];
   @Input() date!: string;
+  @Output() deletedTask = new EventEmitter<any>();
 
   dateAfterFormat: string | undefined
   weekday: string | undefined
@@ -36,6 +37,10 @@ export class NoticeComponent implements OnInit {
 
   isToday(): boolean {
     return this.dateAfterFormat === formatDate(new Date(), 'dd.M.y', this.locale);
+  }
+
+  transferDeletedTask(task: Task) {
+    this.deletedTask.emit(task)
   }
 
 }
