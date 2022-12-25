@@ -3,6 +3,8 @@ import { Task } from "../../../shared/models/task";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { TaskDeleteComponent } from "../../task/task-delete/task-delete.component";
 import { TaskCreateComponent } from "../../task/task-create/task-create.component";
+import { TaskState } from "../../../shared/models/task-state";
+import { TasksService } from "../../../shared/services/tasks.service";
 
 @Component({
   selector: 'app-task-tile',
@@ -16,8 +18,16 @@ export class TaskTileComponent implements OnInit {
   @Output() deletedTask = new EventEmitter<any>();
   @Output() updatedTask = new EventEmitter<any>();
 
+  taskStates: TaskState[] = [
+    TaskState.PLANNED,
+    TaskState.COMPLETED,
+    TaskState.PROGRESS,
+    TaskState.CANCELED
+  ]
+
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private tasksService: TasksService
   ) {
   }
 
@@ -51,4 +61,9 @@ export class TaskTileComponent implements OnInit {
       task: this.task
     }
   }
+
+  updateState() {
+    this.tasksService.updateState(this.task.id!, this.task.state!).subscribe();
+  }
+
 }
