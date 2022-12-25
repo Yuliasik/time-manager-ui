@@ -1,0 +1,6 @@
+export enum TaskState {
+  PLANNED = 'PLANNED',
+  PROGRESS = 'PROGRESS',
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED'
+}

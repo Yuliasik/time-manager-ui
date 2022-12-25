@@ -2,7 +2,20 @@
   <div class="task-main-data-block">
     <div class="title">{{task.title}}</div>
     <div class="action-block">
-      <div>Status</div>
+      <div>
+        <select name="states"
+                id="states"
+                class="state"
+                [(ngModel)]="task.state"
+                [ngClass]="'state-'+task.state"
+                (ngModelChange)="updateState()">
+          <option *ngFor="let state of taskStates"
+                  class="state"
+                  [value]="state">
+            <span>{{state}}</span>
+          </option>
+        </select>
+      </div>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -19,6 +32,4 @@
        (click)="onEditClick()">
     {{task.description}}
   </div>
-
-
 </div>

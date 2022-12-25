@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 import { Task } from "../models/task";
+import { TaskState } from "../models/task-state";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,15 @@ export class TasksService {
   deleteTask(id: number): Observable<Task> {
     let url = `${this._tasksPath}/${id}`;
     return this.httpService.delete<Task>(url);
+  }
+
+  updateState(id: number, state: TaskState): Observable<void> {
+    let url = `${this._tasksPath}/changeState`;
+    let updateState = {
+      id, state
+    }
+    console.log(updateState)
+    return this.httpService.patch<void>(url, updateState);
   }
 
 }

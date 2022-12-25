@@ -1,3 +1,5 @@
+import { TaskState } from "./task-state";
+
 export class Task {
   userId: number | undefined;
 
@@ -8,5 +10,5 @@ export class Task {
   endDate: string | undefined;
   performanceDate?: string;
   approximatePerformanceTime: string | undefined;
-  state?: string
+  state?: TaskState
 }
