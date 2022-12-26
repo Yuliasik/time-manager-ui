@@ -75,7 +75,7 @@
       </app-validation-message>
     </div>
     <div class="buttons-wrapper">
-      <div *ngIf="!this.isEdit || !this.isDuplicate">
+      <div *ngIf="!this.isEdit && !this.isDuplicate">
         <mat-checkbox class="checkbox" formControlName="check">Create another</mat-checkbox>
       </div>
       <button class="button button-style" (click)="onCancelClick()">Close</button>

@@ -78,7 +78,8 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.dialogRef.close();
+    this.dialogRef.close({data: this.tasksFromApi});
+    this.tasksFromApi = []
   }
 
   onSubmitClick() {

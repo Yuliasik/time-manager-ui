@@ -16,9 +16,9 @@ export class TaskTileComponent implements OnInit {
 
   dialogConfig = new MatDialogConfig();
   @Input() task!: Task;
-  @Output() deletedTask = new EventEmitter<any>();
-  @Output() updatedTask = new EventEmitter<any>();
-  @Output() duplicatedTask = new EventEmitter<any>();
+  @Output() deletedTask = new EventEmitter<Task>();
+  @Output() updatedTask = new EventEmitter<Task>();
+  @Output() duplicatedTask = new EventEmitter<Task>();
 
   taskStates: TaskState[] = [
     TaskState.PLANNED,
