@@ -2,28 +2,30 @@
   <div class="task-main-data-block">
     <div class="title">{{task.title}}</div>
     <div class="action-block">
-      <div>
-        <select name="states"
-                id="states"
+      <select name="states"
+              id="states"
+              [(ngModel)]="task.state"
+              [ngClass]="'state-'+task.state"
+              (ngModelChange)="updateState()">
+        <option *ngFor="let state of taskStates"
                 class="state"
-                [(ngModel)]="task.state"
-                [ngClass]="'state-'+task.state"
-                (ngModelChange)="updateState()">
-          <option *ngFor="let state of taskStates"
-                  class="state"
-                  [value]="state">
-            <span>{{state}}</span>
-          </option>
-        </select>
-      </div>
+                [value]="state">
+          <span>{{state}}</span>
+        </option>
+      </select>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item
                 (click)="onDeleteClick()">
-          <mat-icon>delete</mat-icon>
+          <mat-icon>delete_outline</mat-icon>
           <span>Delete</span>
+        </button>
+        <button mat-menu-item
+                (click)="onDuplicateClick()">
+          <mat-icon>content_copy</mat-icon>
+          <span>Duplicate</span>
         </button>
       </mat-menu>
     </div>

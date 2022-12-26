@@ -44,7 +44,6 @@ export class TasksService {
     let updateState = {
       id, state
     }
-    console.log(updateState)
     return this.httpService.patch<void>(url, updateState);
   }
 

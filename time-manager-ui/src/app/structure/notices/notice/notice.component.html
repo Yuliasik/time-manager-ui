@@ -7,7 +7,8 @@
     <div *ngFor="let task of taskForOneDate">
       <app-task-tile [task]="task"
                      (updatedTask)="transferUpdatedTask($event)"
-                     (deletedTask)="transferDeletedTask($event)">
+                     (deletedTask)="transferDeletedTask($event)"
+                     (duplicatedTask)="transferDuplicatedTask($event)">
       </app-task-tile>
     </div>
   </div>

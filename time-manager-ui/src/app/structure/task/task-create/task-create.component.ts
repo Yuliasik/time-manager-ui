@@ -15,6 +15,8 @@ import { DialogComponent } from "../../../shared/components/dialog/dialog.compon
 import { Task } from "../../../shared/models/task";
 import { BaseCreateComponent } from "../../BaseCreateComponent";
 import { formatDate } from "@angular/common";
+import { TaskAction } from "../../../shared/models/task-action";
+import { TaskState } from "../../../shared/models/task-state";
 
 const today = new Date();
 
@@ -26,14 +28,23 @@ const today = new Date();
 export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
 
   private task = new Task();
-  private readonly editableTask: Task | undefined
+  private readonly receivedTask: Task | undefined
+  private readonly actionForTask: TaskAction | undefined
 
   dialogConfig = new MatDialogConfig();
   taskForm!: FormGroup
   tasksFromApi: Task[] = [];
   actionForTitle = 'Add'
   isEdit: boolean = false
+  isDuplicate: boolean = false
   performanceDate: string | undefined
+
+  taskStates: TaskState[] = [
+    TaskState.PLANNED,
+    TaskState.COMPLETED,
+    TaskState.PROGRESS,
+    TaskState.CANCELED
+  ]
 
   constructor(
     public dialog: MatDialog,
@@ -45,47 +56,77 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: any
   ) {
     super();
-    this.editableTask = data?.task;
+    this.actionForTask = data?.action;
+    this.receivedTask = data?.task;
     this.dateAdapter.setLocale('en-GB');
   }
 
   ngOnInit(): void {
     this.initTaskForm();
-    if (this.editableTask) {
-      this.isEdit = true
-      this.actionForTitle = 'Edit'
-      this.fillTaskForm();
+    switch (this.actionForTask) {
+      case TaskAction.EDIT:
+        this.isEdit = true
+        this.actionForTitle = 'Edit'
+        this.fillTaskForm();
+        break;
+      case TaskAction.DUPLICATE:
+        this.isDuplicate = true
+        this.actionForTitle = 'Duplicate'
+        this.fillTaskForm();
+        break;
     }
   }
 
   onCancelClick() {
-    this.dialogRef.close();
+    this.dialogRef.close({data: this.tasksFromApi});
+    this.tasksFromApi = []
   }
 
   onSubmitClick() {
     if (this.isEdit) {
-      this.tasksService.updateTask(this.getTaskFromForm()).subscribe(taskFromApi => {
-          this.dialogRef.close({data: taskFromApi});
-        },
-        (errorRes) => {
-          this.errorHandling(errorRes);
-        }
-      )
+      this.editTask();
+    } else if (this.isDuplicate) {
+      this.duplicateTask();
     } else {
-      this.task.userId = +sessionStorage.getItem("userId")!
-      this.tasksService.addTask(this.getTaskFromForm()).subscribe(taskFromApi => {
-          this.tasksFromApi.push(taskFromApi);
-          if (!this.getValueOf("check")) {
-            this.dialogRef.close({data: this.tasksFromApi});
-            this.tasksFromApi = [];
-          }
-          this.resetForm();
-        },
-        (errorRes) => {
-          this.errorHandling(errorRes);
-        }
-      )
+      this.addTask();
     }
+  }
+
+  private editTask() {
+    this.tasksService.updateTask(this.getTaskFromForm()).subscribe(taskFromApi => {
+        this.dialogRef.close({data: taskFromApi});
+      },
+      (errorRes) => {
+        this.errorHandling(errorRes);
+      }
+    )
+  }
+
+  private duplicateTask() {
+    this.task.userId = +sessionStorage.getItem("userId")!
+    this.tasksService.addTask(this.getTaskFromForm()).subscribe(taskFromApi => {
+        this.dialogRef.close({data: taskFromApi});
+      },
+      (errorRes) => {
+        this.errorHandling(errorRes);
+      }
+    )
+  }
+
+  private addTask() {
+    this.task.userId = +sessionStorage.getItem("userId")!
+    this.tasksService.addTask(this.getTaskFromForm()).subscribe(taskFromApi => {
+        this.tasksFromApi.push(taskFromApi);
+        if (!this.getValueOf("check")) {
+          this.dialogRef.close({data: this.tasksFromApi});
+          this.tasksFromApi = [];
+        }
+        this.resetForm();
+      },
+      (errorRes) => {
+        this.errorHandling(errorRes);
+      }
+    )
   }
 
   private initTaskForm() {
@@ -103,15 +144,15 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
   private fillTaskForm() {
     this.taskForm.addControl("state", new FormControl(today, Validators.required))
     this.taskForm.patchValue({
-      title: this.editableTask?.title,
-      description: this.editableTask?.description,
-      startDate: this.editableTask?.startDate,
-      endDate: this.editableTask?.endDate,
-      hours: this.getHourFromApiFormat(this.editableTask?.approximatePerformanceTime!),
-      minutes: this.getMinuteFromApiFormat(this.editableTask?.approximatePerformanceTime!),
-      state: this.editableTask?.state
+      title: this.receivedTask?.title,
+      description: this.receivedTask?.description,
+      startDate: this.receivedTask?.startDate,
+      endDate: this.receivedTask?.endDate,
+      hours: this.getHourFromApiFormat(this.receivedTask?.approximatePerformanceTime!),
+      minutes: this.getMinuteFromApiFormat(this.receivedTask?.approximatePerformanceTime!),
+      state: this.receivedTask?.state
     })
-    this.performanceDate = this.getBeautifulDate(this.editableTask?.performanceDate!)
+    this.performanceDate = this.getBeautifulDate(this.receivedTask?.performanceDate!)
   }
 
   private getBeautifulDate(date: string): string {
@@ -147,11 +188,12 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
     let task = new Task();
     task.title = this.getValueOf("title");
     task.description = this.getValueOf("description");
-    task.startDate = formatDate(this.getValueOf("startDate"), 'y-M-dd', this.locale);
-    task.endDate = formatDate(this.getValueOf("endDate"), 'y-M-dd', this.locale);
+    task.startDate = formatDate(this.getValueOf("startDate"), 'y-MM-dd', this.locale);
+    task.endDate = formatDate(this.getValueOf("endDate"), 'y-MM-dd', this.locale);
+    console.log(task.startDate)
     task.approximatePerformanceTime = this.getValueOf("hours") + ":" + this.getValueOf("minutes")
     if (this.isEdit) {
-      task.id = this.editableTask?.id
+      task.id = this.receivedTask?.id
       task.state = this.getValueOf("state");
     }
     return task;

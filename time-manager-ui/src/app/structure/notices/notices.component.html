@@ -19,7 +19,8 @@
         <app-notice [taskForOneDate]=allTasks.get(key)!
                     [date]="key"
                     (updatedTask)="updateTask($event)"
-                    (deletedTask)="deleteTask($event)">
+                    (deletedTask)="deleteTask($event)"
+                    (duplicatedTask)="duplicateTask($event)">
         </app-notice>
       </div>
     </ng-container>

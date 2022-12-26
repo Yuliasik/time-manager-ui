@@ -5,6 +5,7 @@ import { TaskDeleteComponent } from "../../task/task-delete/task-delete.componen
 import { TaskCreateComponent } from "../../task/task-create/task-create.component";
 import { TaskState } from "../../../shared/models/task-state";
 import { TasksService } from "../../../shared/services/tasks.service";
+import { TaskAction } from "../../../shared/models/task-action";
 
 @Component({
   selector: 'app-task-tile',
@@ -15,8 +16,9 @@ export class TaskTileComponent implements OnInit {
 
   dialogConfig = new MatDialogConfig();
   @Input() task!: Task;
-  @Output() deletedTask = new EventEmitter<any>();
-  @Output() updatedTask = new EventEmitter<any>();
+  @Output() deletedTask = new EventEmitter<Task>();
+  @Output() updatedTask = new EventEmitter<Task>();
+  @Output() duplicatedTask = new EventEmitter<Task>();
 
   taskStates: TaskState[] = [
     TaskState.PLANNED,
@@ -35,7 +37,10 @@ export class TaskTileComponent implements OnInit {
   }
 
   onDeleteClick() {
-    this.dialogConfigurationWithTask();
+    this.dialogConfigurationWithTaskInInput();
+    this.dialogConfig.data = {
+      task: this.task
+    }
     const dialogRef = this.dialog.open(TaskDeleteComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.data) {
@@ -45,7 +50,11 @@ export class TaskTileComponent implements OnInit {
   }
 
   onEditClick() {
-    this.dialogConfigurationWithTask();
+    this.dialogConfigurationWithTaskInInput();
+    this.dialogConfig.data = {
+      task: this.task,
+      action: TaskAction.EDIT
+    }
     const dialogRef = this.dialog.open(TaskCreateComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.data) {
@@ -54,12 +63,23 @@ export class TaskTileComponent implements OnInit {
     });
   }
 
-  private dialogConfigurationWithTask() {
+  onDuplicateClick() {
+    this.dialogConfigurationWithTaskInInput();
+    this.dialogConfig.data = {
+      task: this.task,
+      action: TaskAction.DUPLICATE
+    }
+    const dialogRef = this.dialog.open(TaskCreateComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.data) {
+        this.duplicatedTask.emit(result.data)
+      }
+    });
+  }
+
+  private dialogConfigurationWithTaskInInput() {
     this.dialogConfig.hasBackdrop = true
     this.dialogConfig.disableClose = true
-    this.dialogConfig.data = {
-      task: this.task
-    }
   }
 
   updateState() {
