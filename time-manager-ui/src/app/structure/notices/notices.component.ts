@@ -155,6 +155,10 @@ export class NoticesComponent implements OnInit, AfterViewChecked {
     this.isTasksPassed = true
   }
 
+  duplicateTask(duplicatedTask: Task) {
+    this.addNewTaskToView(duplicatedTask);
+  }
+
   private isPerformanceDateInRange(performanceDate: number) {
     let length = this.dates.length;
     return (new Date(this.dates[0]).getTime() < performanceDate && performanceDate < new Date(this.dates[length - 1]).getTime())

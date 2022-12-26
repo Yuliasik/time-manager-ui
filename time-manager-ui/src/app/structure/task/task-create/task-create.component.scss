@@ -111,3 +111,24 @@
 .performance-date-label {
   font-weight: bold;
 }
+
+.state-PLANNED {
+  background-color: #b3e5fc;
+  border-color: #82b3c9;
+}
+
+.state-PROGRESS {
+  background-color: #ffecb3;
+  border-color: #cbba83;
+}
+
+.state-COMPLETED {
+  background-color: #dcedc8;
+  border-color: #aabb97;
+
+}
+
+.state-CANCELED {
+  background-color: #ffcdd2;
+  border-color: #cb9ca1;
+}

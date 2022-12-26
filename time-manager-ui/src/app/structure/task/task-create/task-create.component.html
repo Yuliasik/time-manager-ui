@@ -5,7 +5,15 @@
         {{actionForTitle}} task
       </h1>
       <div *ngIf="this.isEdit">
-        <input matInput class="state" formControlName="state" type="text"/>
+        <select class="state"
+                formControlName="state"
+                [ngClass]="'state-'+taskForm.controls['state'].value">
+          <option *ngFor="let state of taskStates"
+                  class="state"
+                  [value]="state">
+            <span>{{state}}</span>
+          </option>
+        </select>
       </div>
     </div>
     <div mat-dialog-content class="fields-container">
@@ -67,7 +75,7 @@
       </app-validation-message>
     </div>
     <div class="buttons-wrapper">
-      <div *ngIf="!this.isEdit">
+      <div *ngIf="!this.isEdit || !this.isDuplicate">
         <mat-checkbox class="checkbox" formControlName="check">Create another</mat-checkbox>
       </div>
       <button class="button button-style" (click)="onCancelClick()">Close</button>

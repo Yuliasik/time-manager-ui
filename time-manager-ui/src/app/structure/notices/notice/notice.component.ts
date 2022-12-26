@@ -13,6 +13,7 @@ export class NoticeComponent implements OnInit {
   @Input() date!: string;
   @Output() deletedTask = new EventEmitter<any>();
   @Output() updatedTask = new EventEmitter<any>();
+  @Output() duplicatedTask = new EventEmitter<any>();
 
   dateAfterFormat: string | undefined
   weekday: string | undefined
@@ -46,6 +47,10 @@ export class NoticeComponent implements OnInit {
 
   transferUpdatedTask(task: Task) {
     this.updatedTask.emit(task)
+  }
+
+  transferDuplicatedTask(task: Task) {
+    this.duplicatedTask.emit(task)
   }
 
 }
