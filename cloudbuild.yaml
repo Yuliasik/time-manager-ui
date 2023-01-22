@@ -6,11 +6,11 @@ steps:
 
   # Build productive files
   - name: 'gcr.io/cloud-builders/npm'
-    args: [ 'run', 'build', '--prod' ]
+    args: [ 'run', 'build-prod' ]
 
   # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', '--version=prod']
+    args: [ 'app', 'deploy', '--version=prod' ]
 
 options:
   logging: CLOUD_LOGGING_ONLY
