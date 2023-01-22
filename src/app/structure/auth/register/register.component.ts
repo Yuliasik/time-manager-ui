@@ -60,6 +60,8 @@ export class RegisterComponent implements OnInit {
           if (session) {
             this.sessionId = session.sessionId
             sessionStorage.setItem('token', this.sessionId);
+            sessionStorage.setItem('userId', String(session.userId))
+            sessionStorage.setItem('username', loginDto.username!)
             this.router.navigate(['']);
           } else {
             alert("Register failed!")
