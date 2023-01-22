@@ -1,6 +1,4 @@
 export const environment = {
   production: true,
-  recaptcha: {
-    siteKey: '6LcUNiAjAAAAAAz6BaSflQbNmWrsqC1-lyzG_ekg'
-  }
+  api_url: 'https://time-manager-api-2v5u4sj6sa-uc.a.run.app'
 };

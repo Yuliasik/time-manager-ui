@@ -36,8 +36,7 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-@^=+!#()$?._%&*])(?=.*[a-zA-Z]).{8,}$/)
         ]
       ],
-      repeatPassword: ['', [Validators.required]],
-      recaptcha: ['', [Validators.required]]
+      repeatPassword: ['', [Validators.required]]
     })
   }
 

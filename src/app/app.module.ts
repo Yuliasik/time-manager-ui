@@ -20,7 +20,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from "ng-recaptcha";
 import { environment } from "../environments/environment";
 import { TaskCreateComponent } from './structure/task/task-create/task-create.component';
 import { NoticesComponent } from './structure/notices/notices.component';
@@ -64,8 +63,6 @@ import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.co
     MatButtonModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    RecaptchaFormsModule,
-    RecaptchaModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -79,12 +76,6 @@ import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.co
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
-    },
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        siteKey: environment.recaptcha.siteKey,
-      } as RecaptchaSettings,
     }
   ],
   bootstrap: [AppComponent]

@@ -31,11 +31,6 @@
     <app-validation-message class="error-message" [condition]="isDifferentPassword()"> Error: Different passwords!
     </app-validation-message>
   </div>
-  <div class="block-input">
-    <re-captcha id="recaptcha" formControlName="recaptcha" required
-                [class.is-invalid]="loginForm.get('recaptcha')!.invalid
-                    && (loginForm.get('recaptcha')!.dirty || loginForm.get('recaptcha')!.touched)"></re-captcha>
-  </div>
   <div class="button-container">
     <button class="button button-back" (click)="back()">
       <link rel="stylesheet"
