@@ -8,7 +8,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RequestInterceptor } from "./request-interceptor.service";
 import { LoginFormComponent } from './structure/auth/login-form/login-form.component';
-import { LogoutComponent } from './structure/auth/logout/logout.component';
 import { GreetingComponent } from './structure/greeting/greeting.component';
 import { PortalComponent } from './structure/portal-layout/portal/portal.component';
 import { NavbarComponent } from './structure/portal-layout/navbar/navbar.component';
@@ -39,7 +38,6 @@ import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.co
     AppComponent,
     TestComponent,
     LoginFormComponent,
-    LogoutComponent,
     GreetingComponent,
     PortalComponent,
     NavbarComponent,
