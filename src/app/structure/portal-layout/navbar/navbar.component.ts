@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { HttpService } from "../../../shared/services/http.service";
 
 @Component({
   selector: 'app-navbar',
@@ -7,15 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpService
+  ) {
   }
 
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   isAuthenticated(): boolean {
     return !!sessionStorage.getItem('token');
+  }
+
+  getUsername(): string{
+    return  sessionStorage.getItem('username')!
+  }
+
+  onLogoutClick() {
+    this.http.get("/api/logout").subscribe(() => {
+      sessionStorage.removeItem('token')
+      this.router.navigate(['/greeting'], {relativeTo: this.route.root})
+    })
   }
 }
