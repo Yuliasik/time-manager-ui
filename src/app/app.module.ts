@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './structure/test/test.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RequestInterceptor } from "./request-interceptor.service";
@@ -19,7 +18,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { environment } from "../environments/environment";
 import { TaskCreateComponent } from './structure/task/task-create/task-create.component';
 import { NoticesComponent } from './structure/notices/notices.component';
 import { MatInputModule } from "@angular/material/input";
@@ -36,7 +34,6 @@ import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.co
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     LoginFormComponent,
     GreetingComponent,
     PortalComponent,

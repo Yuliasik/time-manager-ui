@@ -38,7 +38,7 @@ export class NoticeComponent implements OnInit {
   }
 
   isToday(): boolean {
-    return this.dateAfterFormat === formatDate(new Date(), 'dd.M.y', this.locale);
+    return this.dateAfterFormat === formatDate(new Date(), 'dd.MM.y', this.locale);
   }
 
   transferDeletedTask(task: Task) {
