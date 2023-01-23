@@ -9,10 +9,13 @@
   </div>
   <div class="block-input">
     <label for="password">Password</label>
-    <input type="text"
-           name="password"
-           id="password"
-           formControlName="password"/>
+    <div class="block-input-with-icon">
+      <input [type]="hide ? 'password' : 'text'"
+             class="input-near-icon"
+             id="password"
+             formControlName="password">
+      <mat-icon class="icon-near-input" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </div>
   </div>
   <div class="button-container">
     <button class="button button-back" (click)="back()">
@@ -20,6 +23,6 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
       <span class="material-symbols-outlined">arrow_back_ios</span>
     </button>
-    <button class="button button-login" (click)="login()">Authenticate</button>
+    <button class="button button-login" (click)="login()" [disabled]="loginForm.invalid">Authenticate</button>
   </div>
 </div>

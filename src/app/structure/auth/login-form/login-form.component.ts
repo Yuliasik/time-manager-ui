@@ -18,6 +18,7 @@ export class LoginFormComponent implements OnInit {
   loginForm!: FormGroup;
   dialogConfig = new MatDialogConfig();
   numberOfAttempts = 0;
+  hide = true;
 
   constructor(
     public dialog: MatDialog,
