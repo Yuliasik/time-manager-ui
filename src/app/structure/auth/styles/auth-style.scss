@@ -36,8 +36,12 @@ label {
 
 input {
   height: 30px;
-  width: 300px;
+  width: 334px;
   background: none;
+}
+
+.input-near-icon {
+  width: 300px;
 }
 
 .button-container {
@@ -71,4 +75,14 @@ input {
 
 .error-message {
   width: 600px;
+}
+
+.block-input-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-near-input {
+  padding-left: 10px;
 }

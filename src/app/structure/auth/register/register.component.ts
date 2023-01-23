@@ -18,6 +18,8 @@ export class RegisterComponent implements OnInit {
   sessionId: any = "";
   loginForm!: FormGroup;
   dialogConfig = new MatDialogConfig();
+  hide = true;
+  hideRepeat = true;
 
   constructor(
     public dialog: MatDialog,

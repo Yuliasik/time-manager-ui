@@ -190,7 +190,6 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
     task.description = this.getValueOf("description");
     task.startDate = formatDate(this.getValueOf("startDate"), 'y-MM-dd', this.locale);
     task.endDate = formatDate(this.getValueOf("endDate"), 'y-MM-dd', this.locale);
-    console.log(task.startDate)
     task.approximatePerformanceTime = this.getValueOf("hours") + ":" + this.getValueOf("minutes")
     if (this.isEdit) {
       task.id = this.receivedTask?.id

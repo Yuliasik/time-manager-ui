@@ -10,10 +10,13 @@
   <div class="block-input-with-error">
     <div class="block-input">
       <label for="password">Password</label>
-      <input type="text"
-             name="password"
-             id="password"
-             formControlName="password"/>
+      <div class="block-input-with-icon">
+        <input [type]="hide ? 'password' : 'text'"
+               class="input-near-icon"
+               id="password"
+               formControlName="password"/>
+        <mat-icon class="icon-near-input" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </div>
     </div>
     <app-validation-message class="error-message" [condition]="loginForm.get('password')!.hasError('pattern')">
       The password must contain upper and lower case letters, numbers, and other special characters.
@@ -23,10 +26,14 @@
   <div class="block-input-with-error">
     <div class="block-input">
       <label for="repeat-password">Repeat password</label>
-      <input type="text"
-             name="repeatPassword"
-             id="repeat-password"
-             formControlName="repeatPassword"/>
+      <div class="block-input-with-icon">
+        <input [type]="hideRepeat ? 'password' : 'text'"
+               class="input-near-icon"
+               id="repeat-password"
+               formControlName="repeatPassword"/>
+        <mat-icon class="icon-near-input"
+                  (click)="hideRepeat = !hideRepeat">{{hideRepeat ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </div>
     </div>
     <app-validation-message class="error-message" [condition]="isDifferentPassword()"> Error: Different passwords!
     </app-validation-message>
