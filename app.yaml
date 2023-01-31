@@ -8,6 +8,46 @@ handlers:
     upload: dist/time-manager-ui/index.html
   - url: /
     static_dir: dist/time-manager-ui
+  - url: /(.+\.js)
+    static_files: dist/time-manager-ui/\1
+    upload: dist/time-manager-ui/(.+\.js)
+    redirect_http_response_code: 301
+  - url: /(.+\.css)
+    static_files: dist/time-manager-ui/\1
+    upload: dist/time-manager-ui/(.+\.css)
+    redirect_http_response_code: 301
+  - url: /(.+\.png)
+    static_files: dist/time-manager-ui/\1
+    upload: dist/time-manager-ui/(.+\.png)
+    redirect_http_response_code: 301
+  - url: /(.+\.jpg)
+    static_files: dist/time-manager-ui/\1
+    upload: dist/time-manager-ui/(.+\.jpg)
+    redirect_http_response_code: 301
+  - url: /(.+\.gif)
+    static_files: dist/time-manager-ui/\1
+    upload: dist/time-manager-ui/(.+\.gif)
+    redirect_http_response_code: 301
+  - url: /(.+\.svg)
+    static_files: dist/time-manager-ui/\1
+    upload: dist/time-manager-ui/(.+\.svg)
+    redirect_http_response_code: 301
+  - url: /favicon.ico
+    static_files: dist/time-manager-ui/favicon.ico
+    upload: dist/time-manager-ui/favicon.ico
+    redirect_http_response_code: 301
+  - url: /(.+\.json)
+    static_files: dist/time-manager-ui/\1
+    upload: dist/time-manager-ui/(.+\.json)
+    redirect_http_response_code: 301
+  - url: /(.+)
+    static_files: dist/time-manager-ui/index.html
+    upload: dist/time-manager-ui/index.html
+    redirect_http_response_code: 301
+  - url: /
+    static_files: dist/time-manager-ui/index.html
+    upload: dist/time-manager-ui/index.html
+    redirect_http_response_code: 301
 
 skip_files:
   - e2e/
