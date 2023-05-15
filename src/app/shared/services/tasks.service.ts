@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from "./http.service";
-import { Observable } from "rxjs";
-import { Task } from "../models/task";
-import { TaskState } from "../models/task-state";
+import {Injectable} from '@angular/core';
+import {HttpService} from "./http.service";
+import {Observable} from "rxjs";
+import {Task} from "../models/task";
+import {TaskState} from "../models/task-state";
 
 @Injectable({
   providedIn: 'root'

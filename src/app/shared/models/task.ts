@@ -10,5 +10,7 @@ export class Task {
   endDate: string | undefined;
   performanceDate?: string;
   approximatePerformanceTime: string | undefined;
-  state?: TaskState
+  state?: TaskState;
+  priority: number | undefined;
+
 }

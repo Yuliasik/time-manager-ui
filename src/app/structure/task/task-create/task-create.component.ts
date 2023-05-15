@@ -135,6 +135,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
       description: new FormControl("", Validators.maxLength(500)),
       startDate: new FormControl(today, Validators.required),
       endDate: new FormControl(today, Validators.required),
+      priority: new FormControl(2, Validators.required),
       hours: new FormControl(0, Validators.required),
       minutes: new FormControl(0, Validators.required),
       check: new FormControl(false)
@@ -148,6 +149,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
       description: this.receivedTask?.description,
       startDate: this.receivedTask?.startDate,
       endDate: this.receivedTask?.endDate,
+      priority: this.receivedTask?.priority,
       hours: this.getHourFromApiFormat(this.receivedTask?.approximatePerformanceTime!),
       minutes: this.getMinuteFromApiFormat(this.receivedTask?.approximatePerformanceTime!),
       state: this.receivedTask?.state
@@ -174,6 +176,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
       description: "",
       startDate: today,
       endDate: today,
+      priority: 2,
       hours: 0,
       minutes: 0,
       check: true
@@ -191,6 +194,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
     task.startDate = formatDate(this.getValueOf("startDate"), 'y-MM-dd', this.locale);
     task.endDate = formatDate(this.getValueOf("endDate"), 'y-MM-dd', this.locale);
     task.approximatePerformanceTime = this.getValueOf("hours") + ":" + this.getValueOf("minutes")
+    task.priority = this.getValueOf("priority");
     if (this.isEdit) {
       task.id = this.receivedTask?.id
       task.state = this.getValueOf("state");

@@ -1,6 +1,6 @@
 <div class="notice" [ngClass]="isToday()? 'today': ''">
   <div class="main-container">
-    <div class="date">{{dateAfterFormat}}</div>
+    <div class="date">{{dateAfterFormat == '01.01.1970' ? 'Backlog' : dateAfterFormat}}</div>
     <div class="weekday">{{weekday}}</div>
   </div>
   <div class="tasks">

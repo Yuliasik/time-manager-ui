@@ -54,6 +54,12 @@
         <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
         <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
       </mat-form-field>
+      <mat-form-field class="medium-wight"
+                      [ngClass]="resolveClassWithError(taskForm.controls['priority'].hasError('maxlength'))"
+                      appearance="fill">
+        <mat-label>Priority</mat-label>
+        <input matInput formControlName="priority" type="number"/>
+      </mat-form-field>
       <mat-form-field class="mat-form-with-error medium-wight" appearance="fill">
         <mat-label>Approximate performance time</mat-label>
         <div class="time-container">
