@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div class="header-wrapper">
+    <div class="name-container name">
+      Setting
+    </div>
+  </div>
+  <div class="main-wrapper">
+    <form [formGroup]="settingsForm" class="form-wrapper" mat-dialog-content>
+      <mat-form-field class="example-full-width"
+                      [ngClass]="resolveClassWithError(settingsForm.controls['durationHour'].hasError('max'))
+                      || resolveClassWithError(settingsForm.controls['durationHour'].hasError('min'))"
+                      appearance="fill">
+        <mat-label>Duration hours</mat-label>
+        <input matInput formControlName="durationHour" type="number"
+               [min]="1" [max]="24"/>
+      </mat-form-field>
+      <app-validation-message class="error-message"
+                              [condition]="settingsForm.controls['durationHour'].hasError('max')
+                              || settingsForm.controls['durationHour'].hasError('min')">
+        Duration hours cannot be less than 1 or more than 24
+      </app-validation-message>
+      <mat-form-field class="example-full-width"
+                      appearance="fill">
+        <mat-label>Buffer percentage</mat-label>
+        <input matInput formControlName="bufferPercentage" type="number"
+               [min]="1" [max]="100"/>
+      </mat-form-field>
+      <app-validation-message class="error-message"
+                              [condition]="settingsForm.controls['bufferPercentage'].hasError('max')
+                              || settingsForm.controls['bufferPercentage'].hasError('min')">
+        Buffer percentage cannot be less than 0 or more than 100
+      </app-validation-message>
+      <button class="button button-style"
+              [disabled]="settingsForm.invalid || settingsForm.pristine"
+              (click)="onSubmitClick()">Save
+      </button>
+    </form>
+  </div>
+</div>
