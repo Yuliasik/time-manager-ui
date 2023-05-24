@@ -7,6 +7,7 @@ import { Session } from "../../../shared/models/session";
 import { LoginFormControl } from "../login-form.controls";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DialogComponent } from "../../../shared/components/dialog/dialog.component";
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private http: HttpService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) {
   }
 
@@ -57,7 +59,7 @@ export class RegisterComponent implements OnInit {
   register() {
     let url = "/api/register";
     let loginDto: LoginDto = this.loginForm.value as LoginDto;
-    this.http.post<Session>(url, loginDto)
+    this.userService.register(loginDto)
       .subscribe((session: Session) => {
           if (session) {
             this.sessionId = session.sessionId

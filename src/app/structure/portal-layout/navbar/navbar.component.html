@@ -1,15 +1,26 @@
 <div class="wrapper" *ngIf="isAuthenticated()">
-  <div class="wrapper-greeting">Hello,
-    <span class="username">{{getUsername()}}</span>!
+  <div class="name-container name"
+          (click)="onNameClick()">
+    <span>Time Manager</span>
   </div>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item
-            (click)="onLogoutClick()">
-      <mat-icon>exit_to_app</mat-icon>
-      <span>Logout</span>
+  <div class="wrapper-left-block">
+    <div class="wrapper-greeting">Hello,
+      <span class="username">{{getUsername()}}</span>!
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
     </button>
-  </mat-menu>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+              (click)="onSettingClick()">
+        <mat-icon>settings</mat-icon>
+        <span>Setting</span>
+      </button>
+      <button mat-menu-item
+              (click)="onLogoutClick()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
 </div>

@@ -30,6 +30,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.component';
+import { SettingsComponent } from './structure/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.co
     NoticesComponent,
     TaskTileComponent,
     NoticeComponent,
-    TaskDeleteComponent
+    TaskDeleteComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { Session } from "../../../shared/models/session";
 import { HttpService } from "../../../shared/services/http.service";
 import { DialogComponent } from "../../../shared/components/dialog/dialog.component";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
   selector: 'app-login-form',
@@ -24,7 +25,8 @@ export class LoginFormComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private http: HttpService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) {
   }
 
@@ -33,9 +35,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-    let url = "/api/login";
     let loginDto: LoginDto = this.loginForm.value as LoginDto;
-    this.http.post<Session>(url, loginDto)
+    this.userService.login(loginDto)
       .subscribe((session: Session) => {
           if (session) {
             this.sessionId = session.sessionId
