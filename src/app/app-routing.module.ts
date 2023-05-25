@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthenticationGuard } from "./authentication.guard";
+import { AuthenticationGuard } from "./shared/sequrity/authentication.guard";
 import { LoginFormComponent } from "./structure/auth/login-form/login-form.component";
 import { GreetingComponent } from "./structure/greeting/greeting.component";
 import { RegisterComponent } from "./structure/auth/register/register.component";

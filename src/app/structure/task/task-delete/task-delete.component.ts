@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { TasksService } from "../../../shared/services/tasks.service";
 import { Task } from "../../../shared/models/task";
@@ -9,7 +9,7 @@ import { DialogComponent } from "../../../shared/components/dialog/dialog.compon
   templateUrl: './task-delete.component.html',
   styleUrls: ['./task-delete.component.scss']
 })
-export class TaskDeleteComponent implements OnInit {
+export class TaskDeleteComponent {
 
   dialogConfig = new MatDialogConfig();
   task!: Task
@@ -21,9 +21,6 @@ export class TaskDeleteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: any,
   ) {
     this.task = data.task;
-  }
-
-  ngOnInit(): void {
   }
 
   onCancelClick() {

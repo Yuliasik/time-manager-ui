@@ -1,18 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Task} from "../../../shared/models/task";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {TaskDeleteComponent} from "../../task/task-delete/task-delete.component";
-import {TaskCreateComponent} from "../../task/task-create/task-create.component";
-import {TaskState} from "../../../shared/models/task-state";
-import {TasksService} from "../../../shared/services/tasks.service";
-import {TaskAction} from "../../../shared/models/task-action";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Task } from "../../../shared/models/task";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { TaskDeleteComponent } from "../../task/task-delete/task-delete.component";
+import { TaskCreateComponent } from "../../task/task-create/task-create.component";
+import { TaskState } from "../../../shared/models/task-state";
+import { TasksService } from "../../../shared/services/tasks.service";
+import { TaskAction } from "../../../shared/models/task-action";
 
 @Component({
   selector: 'app-task-tile',
   templateUrl: './task-tile.component.html',
   styleUrls: ['./task-tile.component.scss']
 })
-export class TaskTileComponent implements OnInit {
+export class TaskTileComponent {
 
   dialogConfig = new MatDialogConfig();
   @Input() task!: Task;
@@ -29,9 +29,6 @@ export class TaskTileComponent implements OnInit {
     public dialog: MatDialog,
     private tasksService: TasksService
   ) {
-  }
-
-  ngOnInit(): void {
   }
 
   onDeleteClick() {

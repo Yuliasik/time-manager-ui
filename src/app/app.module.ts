@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { RequestInterceptor } from "./request-interceptor.service";
+import { RequestInterceptor } from "./shared/sequrity/request-interceptor.service";
 import { LoginFormComponent } from './structure/auth/login-form/login-form.component';
 import { GreetingComponent } from './structure/greeting/greeting.component';
 import { PortalComponent } from './structure/portal-layout/portal/portal.component';
