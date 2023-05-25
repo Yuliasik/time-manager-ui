@@ -32,7 +32,7 @@ export class TaskDeleteComponent implements OnInit {
 
   onDeleteClick() {
     this.tasksService.deleteTask(this.task.id!).subscribe(() => {
-        this.dialogRef.close({data: true});
+        this.dialogRef.close({tasksUpdated: true});
       },
       (errorRes) => {
         this.dialogConfig.hasBackdrop = true

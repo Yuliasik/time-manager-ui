@@ -11,9 +11,7 @@ export class NoticeComponent implements OnInit {
 
   @Input() taskForOneDate!: Task[];
   @Input() date!: string;
-  @Output() deletedTask = new EventEmitter<Task>();
-  @Output() updatedTask = new EventEmitter<Task>();
-  @Output() duplicatedTask = new EventEmitter<Task>();
+  @Output() tasksUpdated = new EventEmitter<boolean>();
 
   dateAfterFormat: string | undefined
   weekday: string | undefined
@@ -41,16 +39,8 @@ export class NoticeComponent implements OnInit {
     return this.dateAfterFormat === formatDate(new Date(), 'dd.MM.y', this.locale);
   }
 
-  transferDeletedTask(task: Task) {
-    this.deletedTask.emit(task)
-  }
-
-  transferUpdatedTask(task: Task) {
-    this.updatedTask.emit(task)
-  }
-
-  transferDuplicatedTask(task: Task) {
-    this.duplicatedTask.emit(task)
+  emitTasksUpdated($event: boolean) {
+    this.tasksUpdated.emit($event);
   }
 
 }

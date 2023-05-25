@@ -7,8 +7,6 @@ import {map} from "rxjs";
 import {DialogComponent} from "../../shared/components/dialog/dialog.component";
 import MagicGrid from "magic-grid";
 
-const MAX_COUNT_ON_ONE_PAGE = 12
-
 @Component({
   selector: 'app-notices',
   templateUrl: './notices.component.html',
@@ -65,7 +63,9 @@ export class NoticesComponent implements OnInit, AfterViewChecked {
     this.dialogConfig.disableClose = true
     const dialogRef = this.dialog.open(TaskCreateComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      this.rearrangeTasks();
+      if (result && result.tasksUpdated) {
+        this.rearrangeTasks();
+      }
     });
   }
 
@@ -107,36 +107,11 @@ export class NoticesComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  private addNewTaskToView(task: Task) {
-    this.rearrangeTasks()
-  }
-
-  deleteTask(task: Task) {
-    this.rearrangeTasks()
-  }
-
-  updateTask(updatedTask: Task) {
-    this.rearrangeTasks()
-  }
-
-  duplicateTask(duplicatedTask: Task) {
-    this.addNewTaskToView(duplicatedTask);
-  }
-
-  private isPerformanceDateInRange(performanceDate: number) {
-    let length = this.dates.length;
-    return (new Date(this.dates[0]).getTime() < performanceDate && performanceDate < new Date(this.dates[length - 1]).getTime())
-      || length < MAX_COUNT_ON_ONE_PAGE
-  }
-
-  private getTaskFromMapById(id: number): Task | undefined {
-    let foundedTask: Task | undefined
-    for (let date of this.dates) {
-      foundedTask = this.allTasks.get(date)!.find(t => t.id === id);
-      if (foundedTask) {
-        break
-      }
+  tasksUpdated($event: boolean) {
+    console.log("closed tasksUpdated")
+    if ($event) {
+      this.rearrangeTasks()
     }
-    return foundedTask ? foundedTask : undefined;
   }
+
 }

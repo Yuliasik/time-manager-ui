@@ -1,37 +1,40 @@
-<div class="task-container">
+<div class="task-container clickable" (click)="onEditClick()">
   <div class="task-main-data-block">
     <div class="title">{{task.title}}</div>
-    <div class="action-block">
-      <select name="states"
-              id="states"
-              [(ngModel)]="task.state"
-              [ngClass]="'state-'+task.state"
-              (ngModelChange)="updateState()">
-        <option *ngFor="let state of taskStates"
-                class="state"
-                [value]="state">
-          <span>{{state}}</span>
-        </option>
-      </select>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item
-                (click)="onDeleteClick()">
-          <mat-icon>delete_outline</mat-icon>
-          <span>Delete</span>
+    <div class="except-title-block">
+      <div class="task-duration">{{parsePerformanceTime()}}</div>
+      <div class="action-block">
+        <select name="states"
+                id="states"
+                [(ngModel)]="task.state"
+                [ngClass]="'state-'+task.state"
+                (ngModelChange)="updateState()"
+                (click)="preventClick($event)">
+          <option *ngFor="let state of taskStates"
+                  class="state"
+                  [value]="state">
+            <span>{{state}}</span>
+          </option>
+        </select>
+        <button mat-icon-button [matMenuTriggerFor]="menu" (click)="preventClick($event)">
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button mat-menu-item
-                (click)="onDuplicateClick()">
-          <mat-icon>content_copy</mat-icon>
-          <span>Duplicate</span>
-        </button>
-      </mat-menu>
+        <mat-menu #menu="matMenu" (click)="preventClick($event)">
+          <button mat-menu-item
+                  (click)="onDeleteClick()">
+            <mat-icon>delete_outline</mat-icon>
+            <span>Delete</span>
+          </button>
+          <button mat-menu-item
+                  (click)="onDuplicateClick()">
+            <mat-icon>content_copy</mat-icon>
+            <span>Duplicate</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
   </div>
-  <div class="description clickable"
-       (click)="onEditClick()">
+  <div class="description">
     {{task.description}}
   </div>
 </div>

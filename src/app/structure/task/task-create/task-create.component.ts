@@ -78,7 +78,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
   }
 
   onCancelClick() {
-    this.dialogRef.close({data: this.tasksFromApi});
+    this.dialogRef.close({tasksUpdated: this.tasksFromApi.length !== 0});
     this.tasksFromApi = []
   }
 
@@ -94,7 +94,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
 
   private editTask() {
     this.tasksService.updateTask(this.getTaskFromForm()).subscribe(taskFromApi => {
-        this.dialogRef.close({data: taskFromApi});
+        this.dialogRef.close({tasksUpdated: !!taskFromApi});
       },
       (errorRes) => {
         this.errorHandling(errorRes);
@@ -105,7 +105,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
   private duplicateTask() {
     this.task.userId = +sessionStorage.getItem("userId")!
     this.tasksService.addTask(this.getTaskFromForm()).subscribe(taskFromApi => {
-        this.dialogRef.close({data: taskFromApi});
+        this.dialogRef.close({tasksUpdated: !!taskFromApi});
       },
       (errorRes) => {
         this.errorHandling(errorRes);
@@ -118,7 +118,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
     this.tasksService.addTask(this.getTaskFromForm()).subscribe(taskFromApi => {
         this.tasksFromApi.push(taskFromApi);
         if (!this.getValueOf("check")) {
-          this.dialogRef.close({data: this.tasksFromApi});
+          this.dialogRef.close({tasksUpdated: this.tasksFromApi.length !== 0});
           this.tasksFromApi = [];
         }
         this.resetForm();

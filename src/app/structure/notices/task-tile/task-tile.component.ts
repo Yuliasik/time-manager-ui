@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task } from "../../../shared/models/task";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { TaskDeleteComponent } from "../../task/task-delete/task-delete.component";
-import { TaskCreateComponent } from "../../task/task-create/task-create.component";
-import { TaskState } from "../../../shared/models/task-state";
-import { TasksService } from "../../../shared/services/tasks.service";
-import { TaskAction } from "../../../shared/models/task-action";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Task} from "../../../shared/models/task";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {TaskDeleteComponent} from "../../task/task-delete/task-delete.component";
+import {TaskCreateComponent} from "../../task/task-create/task-create.component";
+import {TaskState} from "../../../shared/models/task-state";
+import {TasksService} from "../../../shared/services/tasks.service";
+import {TaskAction} from "../../../shared/models/task-action";
 
 @Component({
   selector: 'app-task-tile',
@@ -16,9 +16,7 @@ export class TaskTileComponent implements OnInit {
 
   dialogConfig = new MatDialogConfig();
   @Input() task!: Task;
-  @Output() deletedTask = new EventEmitter<Task>();
-  @Output() updatedTask = new EventEmitter<Task>();
-  @Output() duplicatedTask = new EventEmitter<Task>();
+  @Output() tasksUpdated = new EventEmitter<boolean>();
 
   taskStates: TaskState[] = [
     TaskState.PLANNED,
@@ -43,8 +41,8 @@ export class TaskTileComponent implements OnInit {
     }
     const dialogRef = this.dialog.open(TaskDeleteComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      if (result && result.data) {
-        this.deletedTask.emit(this.task)
+      if (result && result.tasksUpdated) {
+        this.tasksUpdated.emit(true)
       }
     });
   }
@@ -57,8 +55,8 @@ export class TaskTileComponent implements OnInit {
     }
     const dialogRef = this.dialog.open(TaskCreateComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      if (result && result.data) {
-        this.updatedTask.emit(result.data)
+      if (result && result.tasksUpdated) {
+        this.tasksUpdated.emit(true)
       }
     });
   }
@@ -71,8 +69,8 @@ export class TaskTileComponent implements OnInit {
     }
     const dialogRef = this.dialog.open(TaskCreateComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      if (result && result.data) {
-        this.duplicatedTask.emit(result.data)
+      if (result && result.tasksUpdated) {
+        this.tasksUpdated.emit(true)
       }
     });
   }
@@ -84,6 +82,22 @@ export class TaskTileComponent implements OnInit {
 
   updateState() {
     this.tasksService.updateState(this.task.id!, this.task.state!).subscribe();
+  }
+
+  parsePerformanceTime(): string {
+    let split = this.task.approximatePerformanceTime?.split(":")!;
+    let result = "";
+    if (split[0] !== "0") {
+      result += split[0] + "h ";
+    }
+    if (split[1] !== "0") {
+      result += split[1] + "m";
+    }
+    return result;
+  }
+
+  preventClick($event: MouseEvent) {
+    $event.stopPropagation();
   }
 
 }

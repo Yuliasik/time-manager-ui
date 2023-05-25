@@ -17,6 +17,13 @@
   align-items: center;
 }
 
+.except-title-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .action-block {
   display: flex;
   flex-direction: row;
@@ -27,6 +34,11 @@
 
 .title {
   font-weight: bold;
+}
+
+.task-duration {
+  font-size: 14px;
+  color: #757575;
 }
 
 .description {
