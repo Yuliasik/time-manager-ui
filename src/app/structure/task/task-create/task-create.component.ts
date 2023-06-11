@@ -196,7 +196,7 @@ export class TaskCreateComponent extends BaseCreateComponent implements OnInit {
     task.approximatePerformanceTime = this.getValueOf("hours") + ":" + this.getValueOf("minutes")
     task.priority = this.getValueOf("priority");
     if (this.isEdit) {
-      task.id = this.receivedTask?.id
+      task.id = this.receivedTask?.originalTaskId
       task.state = this.getValueOf("state");
     }
     return task;

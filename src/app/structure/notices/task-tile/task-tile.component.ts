@@ -78,7 +78,7 @@ export class TaskTileComponent {
   }
 
   updateState() {
-    this.tasksService.updateState(this.task.id!, this.task.state!).subscribe();
+    this.tasksService.updateState(this.task.id!, this.task.state!, this.task.approximatePerformanceTime!).subscribe();
   }
 
   parsePerformanceTime(): string {

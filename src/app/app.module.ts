@@ -31,6 +31,7 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { TaskDeleteComponent } from './structure/task/task-delete/task-delete.component';
 import { SettingsComponent } from './structure/settings/settings.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { SettingsComponent } from './structure/settings/settings.component';
     MatCheckboxModule,
     MatMenuModule,
     ScrollingModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatTooltipModule
   ],
   providers: [
     {

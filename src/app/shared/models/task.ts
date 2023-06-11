@@ -12,5 +12,7 @@ export class Task {
   approximatePerformanceTime: string | undefined;
   state?: TaskState;
   priority: number | undefined;
+  originalTaskId: number | undefined;
+  divided: boolean | undefined;
 
 }

@@ -2,7 +2,14 @@
   <div class="task-main-data-block">
     <div class="title">{{task.title}}</div>
     <div class="except-title-block">
-      <div class="task-duration">{{parsePerformanceTime()}}</div>
+      <div class="task-duration">{{parsePerformanceTime()}}
+        <span *ngIf="task.divided"
+              matTooltip="The task was divided for different days"
+              matTooltipClass="tooltip"
+              class="task-divided-icon">
+          <span><mat-icon>timelapse</mat-icon></span>
+        </span>
+      </div>
       <div class="action-block">
         <select name="states"
                 id="states"

@@ -39,10 +39,10 @@ export class TasksService {
     return this.httpService.delete<Task>(url);
   }
 
-  updateState(id: number, state: TaskState): Observable<void> {
+  updateState(id: number, state: TaskState, performanceTime: string): Observable<void> {
     let url = `${this._tasksPath}/changeState`;
     let updateState = {
-      id, state
+      id, state, performanceTime
     }
     return this.httpService.patch<void>(url, updateState);
   }

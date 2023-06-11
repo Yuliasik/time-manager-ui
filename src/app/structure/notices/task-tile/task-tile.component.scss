@@ -39,6 +39,11 @@
 .task-duration {
   font-size: 14px;
   color: #757575;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .description {
@@ -75,4 +80,9 @@
 .state-CANCELED {
   background-color: #ffcdd2;
   border-color: #cb9ca1;
+}
+
+.task-divided-icon {
+  color: #a2371c;
+  margin-left: 4px;
 }

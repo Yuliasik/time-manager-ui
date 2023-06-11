@@ -28,12 +28,13 @@ export class TaskDeleteComponent {
   }
 
   onDeleteClick() {
-    this.tasksService.deleteTask(this.task.id!).subscribe(() => {
+    this.tasksService.deleteTask(this.task.originalTaskId!).subscribe(() => {
         this.dialogRef.close({tasksUpdated: true});
       },
       (errorRes) => {
         this.dialogConfig.hasBackdrop = true
         this.dialogConfig.disableClose = true
+        console.log(errorRes)
         this.dialogConfig.data = {
           message: errorRes.error
         }
